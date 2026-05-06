@@ -1,4 +1,4 @@
-Yes. Paste the below directly into your GitHub file:
+
 
 `01-Java-Fundamentals/README.md`
 
