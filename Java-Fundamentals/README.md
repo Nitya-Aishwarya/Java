@@ -77,3 +77,13 @@ public class Main {
         System.out.println("Hello World");
     }
 }
+
+## Explanation of Java Program
+
+- `public class Main` defines a class named `Main`. Every Java program must contain at least one class because Java is an object-oriented language and everything is written inside classes.
+
+- `public static void main(String[] args)` is the entry point of the program. The JVM starts execution from this method.
+
+- `System.out.println()` is used to print output to the console.
+
+The `main` method is where the execution of the program begins.
