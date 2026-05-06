@@ -143,7 +143,1119 @@ The Java compiler is called `javac`.
 
 The compiler converts Java source code into bytecode.
 
+## 3.2 Java Runtime Environment
+
+JRE stands for Java Runtime Environment.
+
+The JRE provides the environment needed to run Java applications.
+
+It contains:
+
+* JVM
+* Core libraries
+* Supporting files
+
+The JRE does not contain development tools like the compiler.
+
+This means we can run Java programs using JRE, but we cannot compile Java programs using only JRE.
+
+In simple words, JRE is required when we only want to run Java applications.
+
+---
+
+## 3.3 Java Virtual Machine
+
+JVM stands for Java Virtual Machine.
+
+The JVM is responsible for executing Java bytecode.
+
+When we compile a Java program, the compiler creates bytecode. The JVM reads this bytecode and converts it into machine-level instructions that the operating system can understand.
+
+The JVM is platform-dependent, but Java bytecode is platform-independent.
+
+This means every operating system has its own JVM, but the same Java bytecode can run on all JVMs.
+
+---
+
+## 3.4 Difference Between JDK, JRE, and JVM
+
+| Component | Full Form                | Main Purpose                              |
+| --------- | ------------------------ | ----------------------------------------- |
+| JDK       | Java Development Kit     | Used to develop and compile Java programs |
+| JRE       | Java Runtime Environment | Used to run Java programs                 |
+| JVM       | Java Virtual Machine     | Executes Java bytecode                    |
+
+Simple relationship:
+
+```text
+JDK = JRE + Development Tools
+JRE = JVM + Libraries
+JVM = Executes Bytecode
+```
+
+---
+
+## 3.5 Java Program Execution Flow
+
+The execution of a Java program happens step by step.
+
+First, we write Java source code in a file with the `.java` extension.
+
+Then, the Java compiler compiles the source code and creates a `.class` file.
+
+The `.class` file contains bytecode.
+
+Finally, the JVM executes the bytecode and produces the output.
+
+Execution flow:
+
+```text
+Java Source Code (.java)
+        ↓
+Java Compiler (javac)
+        ↓
+Bytecode (.class)
+        ↓
+JVM
+        ↓
+Output
+```
+
 Example:
 
 ```bash
 javac Main.java
+java Main
+```
+
+The first command compiles the Java program.
+
+The second command runs the compiled program.
+
+---
+
+## 4. Structure of a Java Program
+
+A basic Java program looks like this:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
+}
+```
+
+This program prints `Hello World` on the console.
+
+---
+
+## 4.1 Explanation of the Program
+
+### `public class Main`
+
+This line defines a class named `Main`.
+
+In Java, every program must have at least one class.
+
+The class name should usually match the file name.
+
+For example, if the class name is `Main`, the file name should be:
+
+```text
+Main.java
+```
+
+The keyword `public` means that the class can be accessed from outside the file or package.
+
+The keyword `class` is used to define a class in Java.
+
+---
+
+### `public static void main(String[] args)`
+
+This line defines the main method.
+
+The main method is the entry point of a Java program.
+
+When we run a Java program, the JVM starts execution from the main method.
+
+Let us understand each word:
+
+| Keyword         | Meaning                                                      |
+| --------------- | ------------------------------------------------------------ |
+| `public`        | The method can be accessed by the JVM from outside the class |
+| `static`        | The method can be called without creating an object          |
+| `void`          | The method does not return any value                         |
+| `main`          | The name of the method where execution starts                |
+| `String[] args` | Used to accept command-line arguments                        |
+
+The JVM looks for this exact method signature to start the program.
+
+---
+
+### `System.out.println("Hello World");`
+
+This line prints text on the console.
+
+`System` is a predefined class in Java.
+
+`out` is an object used to send output to the console.
+
+`println()` is a method used to print text and move the cursor to the next line.
+
+The text inside double quotes is printed exactly as it is.
+
+Output:
+
+```text
+Hello World
+```
+
+---
+
+## 5. Data Types in Java
+
+Data types define the type of data a variable can store.
+
+Java is a strongly typed language.
+
+This means every variable must have a declared data type before it can be used.
+
+Example:
+
+```java
+int age = 25;
+```
+
+Here, `int` is the data type, and `age` is the variable name.
+
+Java data types are divided into two main categories:
+
+* Primitive data types
+* Non-primitive data types
+
+---
+
+## 5.1 Primitive Data Types
+
+Primitive data types are the most basic data types in Java.
+
+They store simple values directly.
+
+Java has eight primitive data types:
+
+| Data Type | Used For              | Example                          |
+| --------- | --------------------- | -------------------------------- |
+| `byte`    | Small integer values  | `byte age = 25;`                 |
+| `short`   | Small integer values  | `short marks = 300;`             |
+| `int`     | Whole numbers         | `int salary = 50000;`            |
+| `long`    | Large whole numbers   | `long population = 9000000000L;` |
+| `float`   | Decimal numbers       | `float price = 99.99f;`          |
+| `double`  | Large decimal numbers | `double amount = 12345.678;`     |
+| `char`    | Single character      | `char grade = 'A';`              |
+| `boolean` | True or false values  | `boolean isJavaEasy = true;`     |
+
+Primitive data types are stored directly in memory.
+
+They are faster and use less memory compared to objects.
+
+---
+
+## 5.2 Integer Data Types
+
+Integer data types are used to store whole numbers.
+
+They do not store decimal values.
+
+Example:
+
+```java
+int number = 100;
+```
+
+The most commonly used integer type is `int`.
+
+When we need to store very large numbers, we use `long`.
+
+Example:
+
+```java
+long mobileNumber = 9876543210L;
+```
+
+The letter `L` is added at the end to indicate that the value is of type `long`.
+
+---
+
+## 5.3 Floating-Point Data Types
+
+Floating-point data types are used to store decimal values.
+
+Java provides two floating-point types:
+
+* `float`
+* `double`
+
+Example:
+
+```java
+float price = 99.99f;
+double salary = 45678.9876;
+```
+
+The `float` type requires `f` at the end of the value.
+
+The `double` type is more precise than `float`, so it is commonly used for decimal calculations.
+
+---
+
+## 5.4 Character Data Type
+
+The `char` data type is used to store a single character.
+
+A character value must be written inside single quotes.
+
+Example:
+
+```java
+char grade = 'A';
+```
+
+Java uses Unicode characters, so it can represent characters from many languages.
+
+---
+
+## 5.5 Boolean Data Type
+
+The `boolean` data type stores only two values:
+
+* `true`
+* `false`
+
+Example:
+
+```java
+boolean isLoggedIn = true;
+```
+
+Boolean values are commonly used in conditions and decision-making statements.
+
+---
+
+## 5.6 Non-Primitive Data Types
+
+Non-primitive data types are also called reference data types.
+
+They do not store the actual value directly. Instead, they store the reference or address of an object in memory.
+
+Examples of non-primitive data types are:
+
+* String
+* Array
+* Class
+* Interface
+* Object
+
+Example:
+
+```java
+String name = "Java";
+```
+
+Here, `name` refers to a String object.
+
+Non-primitive data types can have methods.
+
+For example:
+
+```java
+String name = "Java";
+System.out.println(name.length());
+```
+
+The `length()` method returns the number of characters in the string.
+
+---
+
+## 6. Variables in Java
+
+A variable is a named memory location used to store data.
+
+Variables allow us to store values and use them later in the program.
+
+Example:
+
+```java
+int age = 21;
+```
+
+Here:
+
+* `int` is the data type.
+* `age` is the variable name.
+* `21` is the value stored in the variable.
+
+---
+
+## 6.1 Rules for Naming Variables
+
+Variable names must follow certain rules.
+
+A variable name can contain letters, digits, underscores, and dollar signs.
+
+A variable name cannot start with a digit.
+
+A variable name cannot be a Java keyword.
+
+Variable names are case-sensitive.
+
+Example:
+
+```java
+int age = 20;
+int Age = 25;
+```
+
+Here, `age` and `Age` are treated as different variables.
+
+---
+
+## 6.2 Types of Variables
+
+Java has three main types of variables:
+
+* Local variables
+* Instance variables
+* Static variables
+
+---
+
+## 6.3 Local Variables
+
+Local variables are declared inside a method, constructor, or block.
+
+They can be used only within that method, constructor, or block.
+
+Local variables must be initialized before use.
+
+Example:
+
+```java
+public class Example {
+    public static void main(String[] args) {
+        int number = 10;
+        System.out.println(number);
+    }
+}
+```
+
+Here, `number` is a local variable because it is declared inside the main method.
+
+---
+
+## 6.4 Instance Variables
+
+Instance variables are declared inside a class but outside any method.
+
+They belong to an object.
+
+Each object gets its own copy of instance variables.
+
+Example:
+
+```java
+class Student {
+    String name;
+    int age;
+}
+```
+
+Here, `name` and `age` are instance variables.
+
+Each student object can have different values for `name` and `age`.
+
+---
+
+## 6.5 Static Variables
+
+Static variables are declared using the `static` keyword.
+
+They belong to the class, not to individual objects.
+
+All objects of the class share the same static variable.
+
+Example:
+
+```java
+class Student {
+    static String collegeName = "ABC College";
+    String studentName;
+}
+```
+
+Here, `collegeName` is common for all students, so it is declared as static.
+
+---
+
+## 7. Constants in Java
+
+A constant is a value that cannot be changed after it is assigned.
+
+In Java, constants are created using the `final` keyword.
+
+Example:
+
+```java
+final int MAX_VALUE = 100;
+```
+
+Once a value is assigned to a final variable, it cannot be modified.
+
+Example:
+
+```java
+final int DAYS_IN_WEEK = 7;
+```
+
+Constant names are usually written in uppercase letters.
+
+This improves readability and makes it clear that the value should not be changed.
+
+---
+
+## 8. Type Casting in Java
+
+Type casting means converting one data type into another data type.
+
+Java supports two types of type casting:
+
+* Implicit casting
+* Explicit casting
+
+---
+
+## 8.1 Implicit Casting
+
+Implicit casting is also called widening casting.
+
+It happens automatically when a smaller data type is converted into a larger data type.
+
+Example:
+
+```java
+int number = 10;
+double result = number;
+```
+
+Here, the `int` value is automatically converted into a `double`.
+
+There is no data loss in widening casting.
+
+Flow:
+
+```text
+byte -> short -> int -> long -> float -> double
+```
+
+---
+
+## 8.2 Explicit Casting
+
+Explicit casting is also called narrowing casting.
+
+It is done manually when a larger data type is converted into a smaller data type.
+
+Example:
+
+```java
+double price = 99.99;
+int roundedPrice = (int) price;
+```
+
+Here, the decimal part is removed, and only `99` is stored.
+
+This may cause data loss.
+
+That is why explicit casting must be done carefully.
+
+---
+
+## 9. Operators in Java
+
+Operators are symbols used to perform operations on variables and values.
+
+Example:
+
+```java
+int sum = 10 + 20;
+```
+
+Here, `+` is an operator.
+
+Java provides different types of operators.
+
+---
+
+## 9.1 Arithmetic Operators
+
+Arithmetic operators are used to perform mathematical operations.
+
+| Operator | Meaning        | Example |
+| -------- | -------------- | ------- |
+| `+`      | Addition       | `a + b` |
+| `-`      | Subtraction    | `a - b` |
+| `*`      | Multiplication | `a * b` |
+| `/`      | Division       | `a / b` |
+| `%`      | Modulus        | `a % b` |
+
+Example:
+
+```java
+int a = 10;
+int b = 3;
+
+System.out.println(a + b);
+System.out.println(a - b);
+System.out.println(a * b);
+System.out.println(a / b);
+System.out.println(a % b);
+```
+
+The modulus operator returns the remainder after division.
+
+---
+
+## 9.2 Relational Operators
+
+Relational operators are used to compare two values.
+
+They always return a boolean result, either `true` or `false`.
+
+| Operator | Meaning                  |
+| -------- | ------------------------ |
+| `==`     | Equal to                 |
+| `!=`     | Not equal to             |
+| `>`      | Greater than             |
+| `<`      | Less than                |
+| `>=`     | Greater than or equal to |
+| `<=`     | Less than or equal to    |
+
+Example:
+
+```java
+int a = 10;
+int b = 20;
+
+System.out.println(a > b);
+System.out.println(a < b);
+System.out.println(a == b);
+```
+
+---
+
+## 9.3 Logical Operators
+
+Logical operators are used to combine multiple conditions.
+
+| Operator | Meaning     |   |            |
+| -------- | ----------- | - | ---------- |
+| `&&`     | Logical AND |   |            |
+| `        |             | ` | Logical OR |
+| `!`      | Logical NOT |   |            |
+
+Example:
+
+```java
+int age = 20;
+boolean hasId = true;
+
+System.out.println(age >= 18 && hasId);
+```
+
+The `&&` operator returns true only if both conditions are true.
+
+---
+
+## 9.4 Assignment Operators
+
+Assignment operators are used to assign values to variables.
+
+| Operator | Example  | Meaning             |
+| -------- | -------- | ------------------- |
+| `=`      | `a = 10` | Assigns value       |
+| `+=`     | `a += 5` | Same as `a = a + 5` |
+| `-=`     | `a -= 5` | Same as `a = a - 5` |
+| `*=`     | `a *= 5` | Same as `a = a * 5` |
+| `/=`     | `a /= 5` | Same as `a = a / 5` |
+
+Example:
+
+```java
+int a = 10;
+a += 5;
+
+System.out.println(a);
+```
+
+Output:
+
+```text
+15
+```
+
+---
+
+## 9.5 Unary Operators
+
+Unary operators work with only one operand.
+
+Examples include:
+
+* Increment operator
+* Decrement operator
+
+Example:
+
+```java
+int a = 10;
+
+a++;
+System.out.println(a);
+
+a--;
+System.out.println(a);
+```
+
+`a++` increases the value by 1.
+
+`a--` decreases the value by 1.
+
+---
+
+## 9.6 Bitwise Operators
+
+Bitwise operators work on binary values.
+
+They are usually used in low-level programming and performance-based operations.
+
+Common bitwise operators are:
+
+| Operator | Meaning            |            |
+| -------- | ------------------ | ---------- |
+| `&`      | Bitwise AND        |            |
+| `        | `                  | Bitwise OR |
+| `^`      | Bitwise XOR        |            |
+| `~`      | Bitwise Complement |            |
+| `<<`     | Left Shift         |            |
+| `>>`     | Right Shift        |            |
+
+Beginners do not need to master bitwise operators immediately, but it is useful to know that they operate at the binary level.
+
+---
+
+## 10. Input and Output in Java
+
+Input and output are used to interact with the user.
+
+Output means displaying data to the user.
+
+Input means accepting data from the user.
+
+---
+
+## 10.1 Output in Java
+
+Java provides `System.out.print()` and `System.out.println()` for displaying output.
+
+Example:
+
+```java
+System.out.print("Hello");
+System.out.println("World");
+```
+
+The difference is that `println()` moves the cursor to the next line after printing.
+
+`print()` does not move to the next line.
+
+Example:
+
+```java
+System.out.print("Hello ");
+System.out.print("Java");
+```
+
+Output:
+
+```text
+Hello Java
+```
+
+---
+
+## 10.2 Input in Java
+
+To take input from the user, Java provides the `Scanner` class.
+
+The Scanner class is available in the `java.util` package.
+
+Example:
+
+```java
+import java.util.Scanner;
+
+public class InputExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter your age:");
+        int age = sc.nextInt();
+
+        System.out.println("Your age is: " + age);
+    }
+}
+```
+
+In this program, `Scanner` is used to read input from the keyboard.
+
+`nextInt()` reads an integer value.
+
+---
+
+## 10.3 Common Scanner Methods
+
+| Method          | Used For              |
+| --------------- | --------------------- |
+| `nextInt()`     | Reads an integer      |
+| `nextDouble()`  | Reads a double value  |
+| `next()`        | Reads a single word   |
+| `nextLine()`    | Reads a full line     |
+| `nextBoolean()` | Reads a boolean value |
+
+Example:
+
+```java
+Scanner sc = new Scanner(System.in);
+
+String name = sc.nextLine();
+int age = sc.nextInt();
+double salary = sc.nextDouble();
+```
+
+---
+
+## 11. Keywords in Java
+
+Keywords are reserved words in Java.
+
+They have predefined meanings and cannot be used as variable names, method names, or class names.
+
+Examples of Java keywords include:
+
+```text
+class
+public
+static
+void
+int
+if
+else
+for
+while
+return
+new
+final
+```
+
+Example of incorrect usage:
+
+```java
+int class = 10;
+```
+
+This is invalid because `class` is a reserved keyword.
+
+---
+
+## 12. Comments in Java
+
+Comments are used to explain code.
+
+They are ignored by the compiler.
+
+Comments make code easier to read and understand.
+
+Java supports three types of comments.
+
+---
+
+## 12.1 Single-Line Comment
+
+A single-line comment starts with `//`.
+
+Example:
+
+```java
+// This is a single-line comment
+int age = 20;
+```
+
+Single-line comments are useful for short explanations.
+
+---
+
+## 12.2 Multi-Line Comment
+
+A multi-line comment starts with `/*` and ends with `*/`.
+
+Example:
+
+```java
+/*
+This is a multi-line comment.
+It can be written across multiple lines.
+*/
+int number = 10;
+```
+
+Multi-line comments are useful for longer explanations.
+
+---
+
+## 12.3 Documentation Comment
+
+Documentation comments start with `/**` and end with `*/`.
+
+They are used to generate documentation using the Javadoc tool.
+
+Example:
+
+```java
+/**
+ * This method prints a welcome message.
+ */
+public void welcome() {
+    System.out.println("Welcome to Java");
+}
+```
+
+Documentation comments are commonly used in professional Java projects.
+
+---
+
+## 13. Naming Conventions in Java
+
+Naming conventions are standard rules followed while naming classes, variables, methods, and constants.
+
+Following naming conventions makes code clean and readable.
+
+---
+
+## 13.1 Class Names
+
+Class names should use PascalCase.
+
+In PascalCase, each word starts with a capital letter.
+
+Example:
+
+```java
+class StudentDetails {
+}
+```
+
+---
+
+## 13.2 Variable Names
+
+Variable names should use camelCase.
+
+In camelCase, the first word starts with a lowercase letter, and the next words start with capital letters.
+
+Example:
+
+```java
+int studentAge = 20;
+String studentName = "Rahul";
+```
+
+---
+
+## 13.3 Method Names
+
+Method names should also use camelCase.
+
+Example:
+
+```java
+public void calculateTotalMarks() {
+}
+```
+
+---
+
+## 13.4 Constant Names
+
+Constant names should be written in uppercase letters with underscores between words.
+
+Example:
+
+```java
+final int MAX_MARKS = 100;
+```
+
+---
+
+## 14. Memory Basics in Java
+
+Java mainly uses two important memory areas:
+
+* Stack memory
+* Heap memory
+
+Understanding memory helps us understand how variables and objects are stored.
+
+---
+
+## 14.1 Stack Memory
+
+Stack memory stores method calls and local variables.
+
+Whenever a method is called, a new block is created in stack memory.
+
+When the method finishes execution, that block is removed from stack memory.
+
+Example:
+
+```java
+public static void main(String[] args) {
+    int number = 10;
+}
+```
+
+Here, `number` is a local variable and is stored in stack memory.
+
+---
+
+## 14.2 Heap Memory
+
+Heap memory stores objects.
+
+Objects created using the `new` keyword are stored in heap memory.
+
+Example:
+
+```java
+Student s1 = new Student();
+```
+
+Here, the object is created in heap memory.
+
+The reference variable `s1` is stored in stack memory, and it points to the object in heap memory.
+
+---
+
+## 15. Compilation and Execution Errors
+
+Errors are problems that occur in a program.
+
+Java errors can happen during compilation or during execution.
+
+---
+
+## 15.1 Compile-Time Errors
+
+Compile-time errors occur when the code violates Java syntax rules.
+
+These errors are detected by the compiler.
+
+Example:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello World")
+    }
+}
+```
+
+This code gives an error because the semicolon is missing.
+
+Correct code:
+
+```java
+System.out.println("Hello World");
+```
+
+---
+
+## 15.2 Runtime Errors
+
+Runtime errors occur while the program is running.
+
+The program may compile successfully but fail during execution.
+
+Example:
+
+```java
+int a = 10;
+int b = 0;
+
+System.out.println(a / b);
+```
+
+This causes a runtime error because division by zero is not allowed.
+
+---
+
+## 15.3 Logical Errors
+
+Logical errors occur when the program runs successfully but gives the wrong output.
+
+Example:
+
+```java
+int length = 10;
+int width = 5;
+
+int area = length + width;
+```
+
+This code runs without errors, but the formula is wrong.
+
+Correct formula:
+
+```java
+int area = length * width;
+```
+
+Logical errors are harder to find because the compiler does not detect them.
+
+---
+
+## Summary
+
+Java is a high-level, object-oriented, and platform-independent programming language.
+
+Java programs are compiled into bytecode, and the JVM executes that bytecode.
+
+The JDK is used to develop Java programs, the JRE is used to run Java programs, and the JVM executes bytecode.
+
+Java provides primitive and non-primitive data types.
+
+Variables are used to store data, and constants are used to store fixed values.
+
+Operators are used to perform operations on data.
+
+Scanner is used to take input from the user.
+
+Comments and naming conventions help make code readable.
+
+Stack memory stores method calls and local variables, while heap memory stores objects.
+
+Understanding these fundamentals is very important before learning control flow, arrays, methods, and object-oriented programming.
+
+---
+
+
