@@ -559,22 +559,26 @@ This is abstraction.
 ---
 
 # Default Methods in Interface (Java 8)
+Initially, interfaces in Java could contain only:
 
-Before Java 8:
+Abstract methods-by default public abstract
+Public static final variables
 
-* Interfaces could only contain abstract methods.
+But from Java 8 onwards, interfaces can also contain:
 
-Java 8 introduced:
+Default Methods
+Static Methods
 
-* Default methods
-* Static methods
+This was introduced to improve:
 
+* Flexibility
+* Backward compatibility
+* Reusability
 ---
 
 # Default Method
 
-A default method:
-
+A default method is a method inside an interface that already contains implementation.
 * Contains implementation
 * Uses the `default` keyword
 
@@ -644,20 +648,43 @@ Petrol
 * Child classes may override default methods.
 
 ---
+# Overriding Default Methods
+
+Default methods can also be overridden.
+
+Example
+interface Vehicle {
+
+    default void fuelType() {
+        System.out.println("Petrol");
+    }
+}
+
+class ElectricCar implements Vehicle {
+
+    public void fuelType() {
+        System.out.println("Electric Battery");
+    }
+}
+Explanation
+
+The child class overrides the default implementation.
+
+This provides customization.
 
 # Why Default Methods Were Introduced
 
-Suppose thousands of classes implement an interface.
+Suppose an interface is already implemented by many classes.
 
-If a new abstract method is added:
+If we add a new abstract method to the interface:
 
-* Existing classes would break.
+All implementing classes must implement that method.
+Existing code may break.
 
-Default methods solve this problem by:
+To avoid this problem:
 
-* Providing default implementation directly inside the interface.
-
-This improves backward compatibility.
+Java introduced default methods.
+A default implementation can be provided directly inside the interface.
 
 ---
 
@@ -878,127 +905,488 @@ Interfaces can contain:
 
 ---
 
-# Important Interview Questions
 
----
+### Interview Questions on Default and Static Methods
 
-## 1. What is Abstraction?
-
-Abstraction is the process of hiding implementation details and showing only essential functionalities to the user.
-
----
-
-## 2. How is Abstraction achieved in Java?
+## 1. Can interfaces contain method implementation?
+Yes.
 
 Using:
+
+Default methods
+Static methods
+
+## 2. What is a default method?
+A method inside an interface with implementation using the default keyword.
+
+## 3. Why were default methods introduced?
+
+To support backward compatibility and avoid breaking existing code.
+
+## 4. Can default methods be overridden?
+
+Yes.
+
+## 5. What is a static method in interface?
+
+A method that belongs to the interface itself and is called using interface name.
+
+## 6. Can static methods be overridden?
+
+No.
+
+## 7. Can we call static interface methods using object?
+
+No.
+
+Correct way:
+
+InterfaceName.methodName();
+### Tricky Interview Questions
+## 1. Can an interface have constructors?
+
+No.
+
+Interfaces cannot have constructors because objects cannot be created for interfaces.
+
+## 2. Are default methods inherited?
+
+Yes.
+
+## 3. Are static methods inherited?
+
+No.
+
+## 4. Why can’t static methods be overridden?
+
+Because they belong to the interface, not to objects.
+
+## 5. Can interfaces have private methods?
+
+Yes.
+
+From Java 9 onwards, interfaces can contain private methods.
+
+---
+# Interview Questions on Abstraction in Java
+
+---
+
+##  1. What is abstraction in Java?
+
+Abstraction is the process of hiding implementation details and showing only essential functionality to the user.
+
+It focuses on:
+
+* what an object does
+* not how it does it
+
+---
+
+##  2. How is abstraction achieved in Java?
+Abstraction is achieved using:
 
 * Abstract classes
 * Interfaces
 
 ---
 
-## 3. What is an Abstract Class?
+##  3. What is an abstract class?
+An abstract class is a class that:
 
-An abstract class is a class that cannot be instantiated and may contain abstract methods.
+* cannot be instantiated
+* may contain abstract and concrete methods
 
----
+### Example
 
-## 4. What is an Abstract Method?
+```java id="z9u3j6"
+abstract class A {
 
-An abstract method is a method without implementation.
+    abstract void show();
 
----
-
-## 5. Can we create objects of abstract classes?
-
-No.
-
----
-
-## 6. What is the purpose of interfaces?
-
-Interfaces provide abstraction and support multiple inheritance.
-
----
-
-## 7. What are default methods?
-
-Methods with implementation inside interfaces using the `default` keyword.
-
----
-
-## 8. What are static methods in interfaces?
-
-Methods that belong to the interface itself and are called using interface name.
-
----
-
-## 9. Can static methods be overridden?
-
-No.
-
----
-
-## 10. Can interfaces contain private methods?
-
-Yes, from Java 9 onwards.
-
----
-
-# Tricky Interview Questions
-
----
-
-## 1. Can an abstract class contain constructors?
-
-Yes.
-
----
-
-## 2. Can abstract methods have a body?
-
-No.
-
----
-
-## 3. Can interfaces contain implemented methods?
-
-Yes.
-
-Using:
-
-* Default methods
-* Static methods
-
----
-
-## 4. Are default methods inherited?
-
-Yes.
-
----
-
-## 5. Are static methods inherited?
-
-No.
-
----
-
-## 6. Can a class contain both abstraction and encapsulation?
-
-Yes.
-
----
-
-# Most Important Definition
-
-> Abstraction is the process of hiding internal implementation details and exposing only the essential functionalities to the user.
-
----
-
-# One-Line Quick Revision
-
-```text id="nmyxjs"
-Abstraction hides complexity and allows users to interact only with the required functionalities.
+    void display() {
+        System.out.println("Concrete method");
+    }
+}
 ```
+
+---
+
+##  4. What is an interface?
+
+An interface is a blueprint of a class that contains abstract methods and also supports:
+
+* default methods
+* static methods
+* private methods (Java 9+)
+
+Interfaces are mainly used to achieve abstraction and multiple inheritance.
+
+---
+
+##  5. Can we create an object of abstract class or interface?
+
+No.
+
+Both abstract classes and interfaces cannot be instantiated directly.
+
+Wrong:
+
+```java id="e6p9od"
+Animal a = new Animal(); // Error
+```
+
+---
+
+##  6. Can abstract classes have constructors?
+Yes.
+
+Abstract classes can have constructors, and they are called when a child class object is created.
+
+### Example
+
+```java id="vq07od"
+abstract class Animal {
+
+    Animal() {
+        System.out.println("Abstract class constructor");
+    }
+}
+```
+
+---
+
+##  7. Can interfaces have constructors?
+
+
+No.
+
+Interfaces cannot have constructors because:
+
+* interfaces cannot be instantiated
+* constructors are used during object creation
+
+---
+
+##  8. Can interfaces have methods with implementation?
+Yes.
+
+From Java 8 onwards, interfaces can contain:
+
+* default methods
+* static methods
+
+From Java 9 onwards:
+
+* private methods
+
+---
+
+##  9. Are default and static methods part of abstraction?:
+
+Yes.
+
+Abstraction still exists because:
+
+* interfaces still define a contract
+* implementation is still provided by classes
+* default methods are optional
+* static methods are utility-based
+
+---
+
+##  10. Is abstraction still 100% in Java interfaces after Java 8?
+
+
+Before Java 8:
+
+* Interfaces provided 100% abstraction.
+
+After Java 8:
+
+* Interfaces are not strictly 100% abstract because they can contain implemented methods.
+
+However, abstraction still exists because the main contract remains abstract.
+
+---
+
+#  11. Difference between Abstract Class and Interface?
+
+| Feature      | Abstract Class              | Interface                              |
+| ------------ | --------------------------- | -------------------------------------- |
+| Methods      | Abstract + concrete         | Abstract + default + static            |
+| Variables    | Can have instance variables | Only constants (`public static final`) |
+| Constructors |  Yes                        |  No                                    |
+| Inheritance  | Single inheritance          | Multiple inheritance supported         |
+| Keyword      | `extends`                   | `implements`                           |
+
+---
+
+##  12. Why do we need abstraction?
+
+
+Abstraction:
+
+* hides implementation complexity
+* improves security
+* increases code reusability
+* makes systems modular
+* improves maintainability
+* supports scalability
+
+---
+
+##  13. Can a class implement multiple interfaces?
+Yes.
+
+Java supports multiple inheritance using interfaces.
+
+### Example
+
+```java id="d0ydn8"
+class C implements A, B {
+
+}
+```
+
+---
+
+##  14. Can a class extend multiple abstract classes?
+
+No.
+
+Java does not support multiple inheritance with classes because it creates ambiguity problems.
+
+---
+
+##  15. Can abstract class have a main method?
+Yes.
+
+Because:
+
+* static methods are allowed in abstract classes
+* `main()` is a static method
+
+### Example
+
+```java id="0jlwmk"
+abstract class Test {
+
+    public static void main(String[] args) {
+
+        System.out.println("Main Method");
+    }
+}
+```
+
+---
+
+##  16. Can abstract class have final methods?
+Yes.
+
+Final methods:
+
+* cannot be overridden
+* are inherited as they are
+
+### Example
+
+```java id="mjlwm0"
+abstract class A {
+
+    final void show() {
+        System.out.println("Final Method");
+    }
+}
+```
+
+---
+
+## ❓ 17. Can interfaces have variables?
+
+Yes.
+
+But interface variables are always:
+
+* `public`
+* `static`
+* `final`
+
+### Example
+
+```java id="8pjlwm"
+interface Test {
+
+    int x = 10;
+}
+```
+
+Internally:
+
+```java id="pnc2x9"
+public static final int x = 10;
+```
+
+---
+
+##  18. Why are interface variables static final?
+
+
+Because:
+
+* interfaces cannot be instantiated
+* variables must be shared
+* values must remain constant
+
+---
+
+##  19. Can abstract methods exist in interfaces?
+
+Yes.
+
+All interface methods are abstract by default unless they are:
+
+* default methods
+* static methods
+* private methods
+
+---
+
+##  20. Key difference between abstraction and encapsulation?
+
+| Abstraction                             | Encapsulation                   |
+| --------------------------------------- | ------------------------------- |
+| Hides complexity                        | Hides data                      |
+| Focuses on behavior                     | Focuses on data security        |
+| Achieved using abstract class/interface | Achieved using access modifiers |
+
+---
+
+# Additional Tricky Interview Questions
+
+---
+
+##  21. Can abstract classes contain static methods?
+Yes.
+
+Abstract classes can contain:
+
+* static methods
+* concrete methods
+* constructors
+
+---
+
+##  22. Can abstract methods be private?
+
+No.
+
+Because abstract methods must be overridden, and private methods cannot be inherited.
+
+Wrong:
+
+```java id="wjlwm0"
+private abstract void show(); // Error
+```
+
+---
+
+##  23. Can abstract methods be final?
+No.
+
+Because:
+
+* abstract methods must be overridden
+* final methods cannot be overridden
+
+Both are opposite concepts.
+
+---
+
+##  24. Can constructors be abstract?
+No.
+
+Constructors are used during object creation, while abstract methods are incomplete methods.
+
+---
+
+##  25. Can interfaces extend another interface?
+
+Yes.
+
+### Example
+
+```java id="7n2r7s"
+interface A {
+
+}
+
+interface B extends A {
+
+}
+```
+
+---
+
+##  26. Can interfaces implement another interface?
+No.
+
+Interfaces can only extend interfaces.
+
+Classes implement interfaces.
+
+---
+
+##  27. Can an abstract class implement an interface?
+
+Yes.
+
+An abstract class may choose not to implement all interface methods.
+
+### Example
+
+```java id="tv0lsr"
+interface A {
+
+    void show();
+}
+
+abstract class B implements A {
+
+}
+```
+
+---
+
+##  28. What happens if a class does not implement all interface methods?
+
+The class must be declared abstract.
+
+---
+
+##  29. Why do interfaces support multiple inheritance?
+
+Because interfaces only define method contracts and avoid ambiguity caused by multiple class inheritance.
+
+---
+
+##  30. What is the main advantage of abstraction in large projects?
+
+
+Abstraction:
+
+* reduces complexity
+* improves maintainability
+* supports modularity
+* hides internal implementation
+* makes applications scalable
+
+---
+
+# Most Important Interview Definition
+
+> Abstraction is the process of hiding internal implementation details and exposing only essential functionalities to the user.
+
+---
+
 
