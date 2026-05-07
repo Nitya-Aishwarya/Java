@@ -653,6 +653,7 @@ Petrol
 Default methods can also be overridden.
 
 Example
+```java
 interface Vehicle {
 
     default void fuelType() {
@@ -666,6 +667,7 @@ class ElectricCar implements Vehicle {
         System.out.println("Electric Battery");
     }
 }
+```
 Explanation
 
 The child class overrides the default implementation.
