@@ -140,7 +140,8 @@ This is Encapsulation.
 
 # Access Specifiers in Java
 
-Access specifiers define the accessibility of variables and methods.
+Access specifiers are keywords used to define the accessibility or visibility of data members and methods in a class.
+They help in implementing encapsulation and data hiding.
 
 There are four main access specifiers in Java:
 
@@ -155,7 +156,10 @@ There are four main access specifiers in Java:
 
 # 1. Private Access Specifier
 
-The `private` keyword provides maximum security.
+The private access specifier allows access only within the same class.
+
+1.It provides maximum security.
+2.It is mainly used for data hiding.
 
 ## Example
 
@@ -168,14 +172,15 @@ class Student {
 
 ### Explanation
 
-* `age` can only be accessed inside the class.
+* age can only be accessed inside the Student class.
 * Outside classes cannot access it directly.
+* Access is provided through getter and setter methods.
 
 ---
 
 # 2. Public Access Specifier
 
-The `public` keyword allows access from anywhere.
+The public access specifier allows access from anywhere in the program.
 
 ## Example
 
