@@ -561,7 +561,7 @@ This is abstraction.
 # Default Methods in Interface (Java 8)
 Initially, interfaces in Java could contain only:
 
-Abstract methods-by default public abstract
+Abstract methods-by default public abstract methods,
 Public static final variables
 
 But from Java 8 onwards, interfaces can also contain:
@@ -586,7 +586,7 @@ A default method is a method inside an interface that already contains implement
 
 # Syntax
 
-```java id="7vw1j4"
+```java
 interface InterfaceName {
 
     default void methodName() {
@@ -600,7 +600,7 @@ interface InterfaceName {
 
 # Example of Default Method
 
-```java id="yn6vs2"
+```java 
 interface Vehicle {
 
     void start();
