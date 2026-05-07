@@ -1204,7 +1204,7 @@ abstract class A {
 
 ---
 
-## ❓ 17. Can interfaces have variables?
+##  17. Can interfaces have variables?
 
 Yes.
 
