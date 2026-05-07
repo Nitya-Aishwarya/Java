@@ -819,478 +819,6 @@ Dynamic Method Dispatch
 
 ---
 
-# Upcasting
-
-Upcasting means assigning a child class object to a parent class reference.
-
-Example:
-
-```java
-Animal a = new Dog();
-```
-
-Here:
-
-* `Animal` is parent reference
-* `Dog` is child object
-
-This is automatic and safe.
-
-Upcasting is used to achieve runtime polymorphism.
-
----
-
-# Downcasting
-
-Downcasting means converting a parent class reference back to a child class reference.
-
-Example:
-
-```java
-Animal a = new Dog();
-
-Dog d = (Dog) a;
-```
-
-Downcasting is used when we want to access child-specific methods.
-
-Example:
-
-```java
-class Animal {
-
-    void sound() {
-        System.out.println("Animal sound");
-    }
-}
-
-class Dog extends Animal {
-
-    void sound() {
-        System.out.println("Dog barks");
-    }
-
-    void eat() {
-        System.out.println("Dog eats bones");
-    }
-}
-
-public class Main {
-
-    public static void main(String[] args) {
-
-        Animal a = new Dog();
-
-        a.sound();
-
-        Dog d = (Dog) a;
-
-        d.eat();
-    }
-}
-```
-
-Output:
-
-```text
-Dog barks
-Dog eats bones
-```
-
----
-
-# Why Downcasting Is Needed
-
-This will give an error:
-
-```java
-Animal a = new Dog();
-
-a.eat(); // Error
-```
-
-Because reference type is `Animal`, and `Animal` does not contain `eat()`.
-
-So we downcast:
-
-```java
-Dog d = (Dog) a;
-
-d.eat();
-```
-
----
-
-# Wrong Downcasting
-
-Wrong downcasting can cause runtime error.
-
-Example:
-
-```java
-Animal a = new Animal();
-
-Dog d = (Dog) a;
-```
-
-This gives:
-
-```text
-ClassCastException
-```
-
-Because actual object is `Animal`, not `Dog`.
-
----
-
-# Safe Downcasting Using instanceof
-
-```java
-if (a instanceof Dog) {
-
-    Dog d = (Dog) a;
-
-    d.eat();
-}
-```
-
-This prevents runtime errors.
-
----
-
-# Polymorphism with Arrays
-
-Polymorphism allows us to store different child class objects inside a parent type array.
-
-Example:
-
-```java
-class Animal {
-
-    void sound() {
-        System.out.println("Animal sound");
-    }
-}
-
-class Dog extends Animal {
-
-    void sound() {
-        System.out.println("Dog barks");
-    }
-}
-
-class Cat extends Animal {
-
-    void sound() {
-        System.out.println("Cat meows");
-    }
-}
-
-public class Main {
-
-    public static void main(String[] args) {
-
-        Animal[] animals = {
-            new Dog(),
-            new Cat(),
-            new Animal()
-        };
-
-        for (Animal a : animals) {
-            a.sound();
-        }
-    }
-}
-```
-
-Output:
-
-```text
-Dog barks
-Cat meows
-Animal sound
-```
-
-Explanation:
-
-Same reference type:
-
-```text
-Animal
-```
-
-Different object types:
-
-```text
-Dog
-Cat
-Animal
-```
-
-So different overridden methods execute.
-
----
-
-# Polymorphism with Interfaces
-
-Polymorphism can also be achieved using interfaces.
-
-Example:
-
-```java
-interface Payment {
-
-    void pay();
-}
-
-class CreditCardPayment implements Payment {
-
-    public void pay() {
-        System.out.println("Payment using Credit Card");
-    }
-}
-
-class UPIPayment implements Payment {
-
-    public void pay() {
-        System.out.println("Payment using UPI");
-    }
-}
-
-public class Main {
-
-    public static void main(String[] args) {
-
-        Payment p;
-
-        p = new CreditCardPayment();
-        p.pay();
-
-        p = new UPIPayment();
-        p.pay();
-    }
-}
-```
-
-Output:
-
-```text
-Payment using Credit Card
-Payment using UPI
-```
-
-Explanation:
-
-Here:
-
-```java
-Payment p;
-```
-
-is an interface reference.
-
-It can point to different implementation classes:
-
-```java
-new CreditCardPayment()
-new UPIPayment()
-```
-
-Same method:
-
-```java
-pay()
-```
-
-Different behavior.
-
-This is polymorphism.
-
----
-
-# Covariant Return Type in Overriding
-
-In method overriding, return type should be same or covariant.
-
-Covariant return type means:
-
-> The child class overriding method can return a child type of the parent method’s return type.
-
-Example:
-
-```java
-class Animal {
-
-}
-
-class Dog extends Animal {
-
-}
-
-class Parent {
-
-    Animal getAnimal() {
-        return new Animal();
-    }
-}
-
-class Child extends Parent {
-
-    @Override
-    Dog getAnimal() {
-        return new Dog();
-    }
-}
-```
-
-This is allowed because:
-
-```text
-Dog IS-A Animal
-```
-
-So `Dog` is a covariant return type of `Animal`.
-
----
-
-# Rules of Method Overriding
-
-## 1. Method name must be same
-
-```java
-void show()
-```
-
-must be same in parent and child.
-
-## 2. Parameters must be same
-
-If parameters change, it becomes overloading.
-
-## 3. Return type must be same or covariant
-
-Child method can return the same type or child type.
-
-## 4. Access modifier cannot be more restrictive
-
-Example:
-
-```java
-class Parent {
-    public void show() {}
-}
-
-class Child extends Parent {
-    private void show() {} // Error
-}
-```
-
-## 5. Access modifier can be less restrictive
-
-Example:
-
-```java
-class Parent {
-    protected void show() {}
-}
-
-class Child extends Parent {
-    public void show() {}
-}
-```
-
-## 6. Private methods cannot be overridden
-
-Because private methods are not inherited.
-
-## 7. Final methods cannot be overridden
-
-Because final methods cannot be changed.
-
-## 8. Static methods cannot be overridden
-
-They are hidden, not overridden.
-
-## 9. Constructors cannot be overridden
-
-Because constructors are not inherited.
-
----
-
-# Rules of Method Overloading
-
-## 1. Method name must be same
-
-```java
-add()
-```
-
-## 2. Parameters must be different
-
-Difference can be in:
-
-* Number of parameters
-* Type of parameters
-* Order of parameters
-
-## 3. Return type alone is not enough
-
-Changing only return type is invalid.
-
-## 4. Access modifiers can be different
-
-Example:
-
-```java
-public void show(int a) {}
-
-private void show(double a) {}
-```
-
-## 5. Static methods can be overloaded
-
-Example:
-
-```java
-static void show(int a) {}
-
-static void show(String a) {}
-```
-
-## 6. Constructors can be overloaded
-
-Example:
-
-```java
-class Student {
-
-    Student() {}
-
-    Student(String name) {}
-}
-```
-
----
-
-# Final Summary Table
-
-| Concept                   | Meaning                                                 |
-| ------------------------- | ------------------------------------------------------- |
-| Polymorphism              | Many forms                                              |
-| Compile-time polymorphism | Method call decided during compilation                  |
-| Runtime polymorphism      | Method call decided during runtime                      |
-| Method overloading        | Same method name, different parameters                  |
-| Method overriding         | Same method name, same parameters in parent-child class |
-| Static binding            | Compile-time binding                                    |
-| Dynamic binding           | Runtime binding                                         |
-| Reference type            | Left side class type                                    |
-| Object type               | Actual object created using `new`                       |
-| Upcasting                 | Parent reference holding child object                   |
-| Downcasting               | Converting parent reference back to child reference     |
-| Method hiding             | Static method with same name in parent and child        |
-
----
-
 # Types of Polymorphism
 
 There are mainly two types of polymorphism:
@@ -1735,6 +1263,58 @@ Explanation:
 * `sound()` is overridden, so it shows runtime polymorphism.
 
 ---
+# Rules of Method Overloading
+
+## 1. Method name must be same
+
+```java
+add()
+```
+
+## 2. Parameters must be different
+
+Difference can be in:
+
+* Number of parameters
+* Type of parameters
+* Order of parameters
+
+## 3. Return type alone is not enough
+
+Changing only return type is invalid.
+
+## 4. Access modifiers can be different
+
+Example:
+
+```java
+public void show(int a) {}
+
+private void show(double a) {}
+```
+
+## 5. Static methods can be overloaded
+
+Example:
+
+```java
+static void show(int a) {}
+
+static void show(String a) {}
+```
+
+## 6. Constructors can be overloaded
+
+Example:
+
+```java
+class Student {
+
+    Student() {}
+
+    Student(String name) {}
+}
+```
 
 # Important Rules of Method Overriding
 
@@ -1882,7 +1462,27 @@ d.eat();
 ```
 
 ---
+# Why Downcasting Is Needed
 
+This will give an error:
+
+```java
+Animal a = new Dog();
+
+a.eat(); // Error
+```
+
+Because reference type is `Animal`, and `Animal` does not contain `eat()`.
+
+So we downcast:
+
+```java
+Dog d = (Dog) a;
+
+d.eat();
+```
+
+---
 # Important Note About Downcasting
 
 Wrong downcasting can cause runtime error.
@@ -2088,7 +1688,50 @@ Here:
 This is polymorphism.
 
 ---
+# Covariant Return Type in Overriding
 
+In method overriding, return type should be same or covariant.
+
+Covariant return type means:
+
+> The child class overriding method can return a child type of the parent method’s return type.
+
+Example:
+
+```java
+class Animal {
+
+}
+
+class Dog extends Animal {
+
+}
+
+class Parent {
+
+    Animal getAnimal() {
+        return new Animal();
+    }
+}
+
+class Child extends Parent {
+
+    @Override
+    Dog getAnimal() {
+        return new Dog();
+    }
+}
+```
+
+This is allowed because:
+
+```text
+Dog IS-A Animal
+```
+
+So `Dog` is a covariant return type of `Animal`.
+
+---
 # Benefits of Polymorphism
 
 ## 1. Code Reusability
