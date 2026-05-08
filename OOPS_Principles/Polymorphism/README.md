@@ -219,10 +219,7 @@ Because the reference type is `Television`, and `Television` does not know about
 
 Even though the actual object is `SamsungTV`, the compiler checks the reference type first.
 
----
-Below are the **missing parts you can add** to your existing Polymorphism notes while maintaining the same format and explanation style.
 
----
 
 # Additional Concepts to Add in Polymorphism
 
