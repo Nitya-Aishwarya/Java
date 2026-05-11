@@ -1,4 +1,4 @@
-package com.endava.strings;
+package com.practice.strings;
 
 import java.util.Arrays;
 
