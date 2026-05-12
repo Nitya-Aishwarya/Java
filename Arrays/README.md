@@ -717,13 +717,15 @@ This causes integer overflow.
 
 Unsafe formula:
 
-\frac{\text{low}+\text{high}}{2}
+```text
+(low + high) / 2
+```
 
 Safer formula:
 
-\text{mid}=\text{low}+\frac{(\text{high}-\text{low})}{2}
-
----
+```text
+mid = low + (high - low) / 2
+```
 
 # Why Safer Formula Works
 
@@ -738,7 +740,9 @@ Instead of adding two huge numbers first:
 
 Start:
 
-\text{mid}=\frac{\text{low}+\text{high}}{2}
+```text
+mid = (low + high) / 2
+```
 
 Rewrite:
 
@@ -1053,7 +1057,7 @@ Since both references point to same object:
 
 ---
 
-# ❌ Reassigning Reference
+#  Reassigning Reference
 
 Example:
 
@@ -1414,7 +1418,7 @@ Compiler converts varargs into arrays internally.
 
 ---
 
-# 🔥 Ultimate One-Line Memory Trick
+#  Ultimate One-Line Memory Trick
 
 ```text
 Primitive → copy of data
