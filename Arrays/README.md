@@ -204,7 +204,9 @@ The index represents the offset distance from the starting memory location.
 
 Formula:
 
-\text{Address of Element} = \text{Base Address} + (\text{Index} \times \text{Element Size})
+```text
+Address of Element = Base Address + (Index × Element Size)
+```
 
 For first element:
 
@@ -642,7 +644,9 @@ high = 4
 
 Middle index:
 
-\text{mid} = \frac{\text{low}+\text{high}}{2}
+```text
+mid = (low + high) / 2
+```
 
 Result:
 
