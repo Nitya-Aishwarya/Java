@@ -1,6 +1,6 @@
-```
-### EXCEPTION HANDLING
-```
+
+# EXCEPTION HANDLING
+
 # 1. What is Exception Handling?
 
 Exception handling is a mechanism in Java used to handle abnormal situations that occur while a program is running.
