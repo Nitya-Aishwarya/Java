@@ -19,23 +19,14 @@ public interface RentalService {
 	public List<Transaction> getAllTransactons();
 	
 	
-//	Group vehicles by rental count:
-//		Map<Integer, List<Vehicle>>
+//	Group vehicles by rental count
 	public Map<Integer,List<Vehicle>>vehiclesByRentalCount();
 	
-//		Group vehicles by type:
-//		Map<VehicleType, List<Vehicle>>
+//		Group vehicles by type
 	public Map<VehicleType,List<Vehicle>> groupByVehicles();
-//		Count total rentals per vehicle type:
-//		Map<VehicleType, Integer>
+	
+//		Count total rentals per vehicle type
 	public Map<VehicleType,Integer>rentalsPerVehicle();
 	
-//		Find most popular vehicle type.
-//		Track active rentals:
-//		Map<String, Integer>
-//		(vehicleId → customerId)
-//		Find all currently rented vehicles.
-//		Detect vehicles that are never rented.
-//		Merge two rental maps:
-//		sum values for same vehicle
+
 }
