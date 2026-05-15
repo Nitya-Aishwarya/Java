@@ -583,13 +583,194 @@ Therefore iteration works.
 
 ---
 
-# Creating Custom Iterable Class
+# Why Iterable Is Powerful
 
-This is the best way to understand `Iterable` deeply.
+The power of `Iterable` lies in abstraction and standardization.
+
+Without `Iterable`:
+
+* every collection would need separate traversal code
+* traversal logic would become inconsistent
+
+With `Iterable`:
+
+* all collections expose elements uniformly
+* traversal becomes standardized
+
+This is one of the reasons why the Java Collections Framework is elegant and scalable.
 
 ---
 
-# Step 1 — Create Iterable Class
+# Iterable Does Not Store Data
+
+This is a very important point.
+
+`Iterable` is only an interface.
+
+It does not store elements.
+
+It only defines the ability to provide an iterator.
+
+For example, `ArrayList` stores the actual data.
+
+`Iterable` only says:
+
+```text
+This object can provide an iterator.
+```
+
+So we should not think of `Iterable` as a data structure.
+
+We should think of it as a capability.
+
+---
+
+# Iterable vs Iterator
+
+This is one of the most important differences.
+
+## Iterable
+
+`Iterable` represents an object that can be iterated.
+
+It has the `iterator()` method.
+
+Example:
+
+```java
+List<String> list = new ArrayList<>();
+```
+
+Here, `list` is iterable.
+
+---
+
+## Iterator
+
+`Iterator` is the actual object that moves through the collection.
+
+It has methods such as:
+
+```java
+hasNext()
+next()
+remove()
+```
+
+Example:
+
+```java
+Iterator<String> iterator = list.iterator();
+```
+
+Here, `iterator` is the object that performs traversal.
+
+---
+
+## Simple Difference
+
+```text
+Iterable = object that can be looped over
+Iterator = object that performs the loop
+```
+
+A simple analogy is:
+
+```text
+Iterable is like a book.
+Iterator is like a bookmark that moves page by page.
+```
+
+The book contains pages, but the bookmark helps us move through them.
+
+---
+
+# Why Collection Extends Iterable
+
+The `Collection` interface extends `Iterable`.
+
+```java
+public interface Collection<E> extends Iterable<E>
+```
+
+This means every collection must be iterable.
+
+Because of this, all major collections can be used in a for-each loop.
+
+Examples:
+
+```java
+List<String> list = new ArrayList<>();
+Set<Integer> set = new HashSet<>();
+Queue<String> queue = new LinkedList<>();
+```
+
+All of these can be used like this:
+
+```java
+for (String item : list) {
+    System.out.println(item);
+}
+```
+
+The reason is that `List`, `Set`, and `Queue` all come under `Collection`, and `Collection` extends `Iterable`.
+
+---
+
+# Internal Flow of Iterable
+
+The internal flow is:
+
+```text
+Collection object is created
+        |
+Collection implements Iterable
+        |
+iterator() method is available
+        |
+iterator() returns Iterator object
+        |
+Iterator uses hasNext() and next()
+        |
+Elements are accessed one by one
+```
+
+Example:
+
+```java
+List<Integer> numbers = new ArrayList<>();
+
+numbers.add(10);
+numbers.add(20);
+numbers.add(30);
+
+Iterator<Integer> iterator = numbers.iterator();
+
+while (iterator.hasNext()) {
+    Integer number = iterator.next();
+    System.out.println(number);
+}
+```
+
+Step-by-step:
+
+First, the `ArrayList` object stores the elements `10`, `20`, and `30`.
+
+Second, the `iterator()` method is called on the list.
+
+Third, Java returns an iterator object.
+
+Fourth, `hasNext()` checks whether another element exists.
+
+Fifth, `next()` returns the current element and moves forward.
+
+This process continues until no elements are left.
+
+---
+
+# Custom Iterable Class
+
+To fully understand `Iterable`, we can create our own class that supports the for-each loop.
 
 ```java
 import java.util.Iterator;
@@ -619,13 +800,10 @@ class MyNumbers implements Iterable<Integer> {
 }
 ```
 
----
-
-# Step 2 — Use for-each Loop
+Now we can use this class in a for-each loop.
 
 ```java
 public class Main {
-
     public static void main(String[] args) {
 
         MyNumbers nums = new MyNumbers();
@@ -637,83 +815,218 @@ public class Main {
 }
 ```
 
+Output:
+
+```text
+10
+20
+30
+```
+
 ---
 
-# Internal Explanation of This Example
+# Explanation of Custom Iterable Example
 
-The class implements:
+The class `MyNumbers` implements `Iterable<Integer>`.
+
+This means `MyNumbers` promises that it will provide an iterator for `Integer` values.
+
+Inside the class, we have an integer array:
 
 ```java
-Iterable<Integer>
+private int[] numbers = {10, 20, 30};
 ```
 
-This means the class promises:
+Then we override the `iterator()` method.
 
-* it can provide an iterator
-* it supports traversal
+```java
+@Override
+public Iterator<Integer> iterator()
+```
 
-The `iterator()` method returns an anonymous iterator object.
+Inside this method, we return an anonymous `Iterator<Integer>` object.
 
-That iterator contains:
+That iterator has an `index` variable.
 
-* current index
-* traversal logic
+```java
+int index = 0;
+```
 
-The `hasNext()` method checks whether another element exists.
+The `hasNext()` method checks whether the current index is still within the array length.
 
-The `next()` method returns the current element and moves forward.
+```java
+return index < numbers.length;
+```
 
-The for-each loop internally uses this iterator.
+The `next()` method returns the current element and then increases the index.
+
+```java
+return numbers[index++];
+```
+
+Because the class implements `Iterable`, Java allows us to write:
+
+```java
+for (Integer num : nums)
+```
+
+Without `Iterable`, this for-each loop would not work.
 
 ---
 
-# Why Iterable Is Powerful
+# Iterable with Different Collections
 
-The power of `Iterable` lies in abstraction and standardization.
+## Iterable with ArrayList
 
-Without `Iterable`:
+```java
+List<String> list = new ArrayList<>();
+```
 
-* every collection would need separate traversal code
-* traversal logic would become inconsistent
-
-With `Iterable`:
-
-* all collections expose elements uniformly
-* traversal becomes standardized
-
-This is one of the reasons why the Java Collections Framework is elegant and scalable.
+An `ArrayList` is iterable because it implements `List`, and `List` extends `Collection`, and `Collection` extends `Iterable`.
 
 ---
 
-# Final Conceptual Understanding
+## Iterable with HashSet
 
-The `Iterable` interface is not about storing elements.
-
-It is about exposing elements sequentially.
-
-It acts as a contract that says:
-
-```text
-This object can provide an iterator for traversal.
+```java
+Set<Integer> set = new HashSet<>();
 ```
 
-The actual traversal is done by:
+A `HashSet` is also iterable.
 
-* `Iterator`
-* `hasNext()`
-* `next()`
+However, the order of iteration is not guaranteed because `HashSet` does not maintain insertion order.
 
-The enhanced for-each loop depends entirely on `Iterable`.
+---
 
-The core philosophy is:
+## Iterable with TreeSet
 
-```text
-Separate storage logic from traversal logic.
+```java
+Set<Integer> set = new TreeSet<>();
 ```
 
-That separation is achieved through:
+A `TreeSet` is iterable, and it returns elements in sorted order.
 
-* Iterable
-* Iterator
+---
 
-This design makes the Java Collections Framework flexible, reusable, and implementation-independent.
+## Iterable with Queue
+
+```java
+Queue<String> queue = new LinkedList<>();
+```
+
+A queue is also iterable because `Queue` extends `Collection`.
+
+---
+
+# Does Map Implement Iterable?
+
+No, `Map` does not implement `Iterable`.
+
+This is very important.
+
+A `Map` stores key-value pairs.
+
+A `Collection` stores individual elements.
+
+Because of this difference, `Map` is not a child of `Collection` and does not directly implement `Iterable`.
+
+So this is not allowed:
+
+```java
+for (String item : map) {
+}
+```
+
+To iterate over a map, we use one of these:
+
+```java
+map.keySet()
+map.values()
+map.entrySet()
+```
+
+Example:
+
+```java
+Map<Integer, String> map = new HashMap<>();
+
+map.put(1, "Java");
+map.put(2, "Python");
+
+for (Map.Entry<Integer, String> entry : map.entrySet()) {
+    System.out.println(entry.getKey() + " = " + entry.getValue());
+}
+```
+
+Here, `entrySet()` returns a `Set`.
+
+Since `Set` is iterable, the for-each loop works.
+
+---
+
+# Why Iterable is a Functional Interface
+
+`Iterable` is considered a functional interface because it has only one abstract method.
+
+That method is:
+
+```java
+iterator()
+```
+
+The other methods, such as `forEach()` and `spliterator()`, are default methods.
+
+A functional interface can be used with lambda expressions, although we rarely use `Iterable` directly in that way.
+
+---
+
+# Key Internal Concept
+
+The most important internal concept is that `Iterable` separates the collection from the traversal logic.
+
+The collection stores the data.
+
+The iterator knows how to traverse the data.
+
+This design is useful because different collections store data differently.
+
+For example:
+
+```text
+ArrayList stores data using an array.
+LinkedList stores data using nodes.
+HashSet stores data using hashing.
+TreeSet stores data using a tree.
+```
+
+Even though their internal structures are different, they can all be traversed using the same pattern because they all provide an iterator.
+
+That is the power of the `Iterable` interface.
+
+---
+
+# Final Summary
+
+`Iterable` is the top-level interface that gives an object the ability to be iterated.
+
+It belongs to the `java.lang` package.
+
+Its most important method is `iterator()`.
+
+The `iterator()` method returns an `Iterator`.
+
+The `Iterator` performs the actual traversal using `hasNext()` and `next()`.
+
+The enhanced for-each loop works because of `Iterable`.
+
+The `Collection` interface extends `Iterable`, so all major collections such as `ArrayList`, `LinkedList`, `HashSet`, `TreeSet`, and `Queue` can be used in for-each loops.
+
+`Map` does not directly implement `Iterable`, but we can iterate over its `keySet()`, `values()`, or `entrySet()`.
+
+The core idea is:
+
+```text
+Iterable gives the ability to iterate.
+Iterator performs the actual iteration.
+```
+
