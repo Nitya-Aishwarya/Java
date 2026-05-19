@@ -1,4 +1,4 @@
-# Java Streams with Intermediate and Terminal Operations — Complete Deep Internal Explanation with Full Human-Friendly Sentencing
+# Java Streams with Intermediate and Terminal Operations
 
 # 1. Introduction to Streams
 
