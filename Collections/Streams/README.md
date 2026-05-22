@@ -23,6 +23,20 @@ instead of:
 > “How to manually iterate through the data”
 
 ---
+The `stream()` method is a **default method** introduced in Java 8 inside the `Collection` interface.
+The stream() method provided by the Collection interface returns a Stream interface object. The Stream interface supports intermediate operations such as filter(), map(), and sorted(),and terminal operations such as collect(), count(), and forEach() for functional-style data processing.
+
+Example:
+
+```java
+Map<String, List<Employee>> result =
+        employees.stream()
+                 .collect(Collectors.groupingBy(e -> e.department));
+```
+
+So the better sentence is:
+
+The `stream()` method provides a stream pipeline for processing a sequence of elements using intermediate operations such as `filter()`, `map()`, and `sorted()`, and terminal operations such as `collect()`, where collectors like `groupingBy()` can be used.
 
 # The Most Important Definition of Stream
 
